@@ -1,0 +1,18 @@
+version: '3.3'
+volumes:
+  data:
+services:
+  database:
+    image: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: coffeexyz
+    working_dir: /application
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=coffeexyz
+    ports:
+      - '3306:3306'
