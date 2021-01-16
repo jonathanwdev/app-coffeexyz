@@ -8,6 +8,7 @@ const makeFakeUser = (): User => ({
   created_at: new Date(),
   updated_at: new Date(),
 });
+const fakeMail = 'jon@mail.com';
 
 const makeFakeUserRepository = (): IUserRepository => {
   class UserRepositoryStub implements IUserRepository {
@@ -18,20 +19,31 @@ const makeFakeUserRepository = (): IUserRepository => {
     async save(email): Promise<User> {
       return new Promise(resolve => resolve(makeFakeUser()));
     }
+
+    async findByEmail(email): Promise<User | undefined> {
+      return new Promise(resolve => resolve(makeFakeUser()));
+    }
   }
   return new UserRepositoryStub();
 };
 
 const makeSut = () => {
-  return new AuthService(makeFakeUserRepository());
+  const sut = new AuthService(makeFakeUserRepository());
+  return {
+    sut,
+    userRepositoryStub: makeFakeUserRepository(),
+  };
 };
 
 describe('Authentication', () => {
-  it('shoud return an user authenticated', async () => {
-    const sut = makeSut();
-    const { user, token } = await sut.execute('jon@mail.com');
+  it('shoud create or return a user on success', async () => {
+    const { sut, userRepositoryStub } = makeSut();
+    const { user, token } = await sut.execute(fakeMail);
+    jest
+      .spyOn(userRepositoryStub, 'findByEmail')
+      .mockReturnValueOnce(new Promise(resolve => resolve(undefined)));
     expect(user).toHaveProperty('id');
-    expect(token).toBe('any_token');
-    expect(user.email).toBe('jon@mail.com');
+    expect(token).toBeTruthy();
+    expect(user.email).toBe(fakeMail);
   });
 });
