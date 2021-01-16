@@ -1,4 +1,6 @@
 import User from 'infra/typeorm/entities/User';
+import { sign } from 'jsonwebtoken';
+import jwtConfig from '../config/jwt';
 import IUserRepository from '../repositories/IUserRepository';
 
 interface Response {
@@ -14,11 +16,30 @@ class AuthService {
   }
 
   public async execute(email: string): Promise<Response> {
-    const user = await this.userRepository.create(email);
-    await this.userRepository.save(user);
+    const findUser = await this.userRepository.findByEmail(email);
+    let token;
+
+    if (findUser) {
+      token = sign({}, jwtConfig.secret, {
+        subject: findUser.id,
+        expiresIn: jwtConfig.expiresIn,
+      });
+
+      return {
+        user: findUser,
+        token,
+      };
+    }
+    const contUserIntance = await this.userRepository.create(email);
+    const user = await this.userRepository.save(contUserIntance);
+    token = sign({}, jwtConfig.secret, {
+      subject: user.id,
+      expiresIn: jwtConfig.expiresIn,
+    });
+
     return {
       user,
-      token: 'any_token',
+      token,
     };
   }
 }
