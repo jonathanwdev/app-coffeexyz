@@ -17,7 +17,8 @@ class TransactionRepository implements ITransactionRepository {
     userId: string,
   ): Promise<Transaction[] | undefined> {
     const transactions = await this.ormRepository.find({
-      where: { id: userId },
+      where: { user_id: userId },
+      relations: ['user', 'transactionItems'],
     });
     return transactions;
   }
