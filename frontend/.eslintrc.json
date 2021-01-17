@@ -19,7 +19,7 @@
     "plugins": [
         "react",
         "prettier",
-        "react-hooks"
+        "eslint-plugin-react-hooks"
     ],
     "rules": {
       "react/react-in-jsx-scope":"off",
@@ -36,6 +36,6 @@
       "camelcase": "off",
       "no-console": ["error", { "allow": ["tron"] }],
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "off"
+      "react/jsx-props-no-spreading":"off"
     }
 }
