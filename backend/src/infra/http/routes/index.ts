@@ -15,5 +15,6 @@ routes.post('/auth', authController.create);
 routes.use(AuthMiddleware);
 routes.get('/products', productController.index);
 routes.post('/transaction', transactionController.create);
+routes.get('/transaction', transactionController.index);
 
 export default routes;
