@@ -1,4 +1,6 @@
+import React from 'react';
 import { Route as ReactDOMRoute, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Routes = ({ isPrivate = false, component: Component, ...rest }) => {
   const user = false;
@@ -23,3 +25,13 @@ const Routes = ({ isPrivate = false, component: Component, ...rest }) => {
 };
 
 export default Routes;
+
+Routes.propTypes = {
+  isPrivate: PropTypes.bool,
+  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+    .isRequired,
+};
+
+Routes.defaultProps = {
+  isPrivate: false,
+};
