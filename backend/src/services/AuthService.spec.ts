@@ -1,4 +1,5 @@
 import IUserRepository from 'repositories/IUserRepository';
+import ErrorHandler from '../Errors/ErrorHandler';
 import User from '../infra/typeorm/entities/User';
 import AuthService from './AuthService';
 
@@ -45,5 +46,9 @@ describe('Authentication', () => {
     expect(user).toHaveProperty('id');
     expect(token).toBeTruthy();
     expect(user.email).toBe(fakeMail);
+  });
+  it('shoud return an error with invalid email', async () => {
+    const { sut } = makeSut();
+    await expect(sut.execute('')).rejects.toBeInstanceOf(ErrorHandler);
   });
 });
