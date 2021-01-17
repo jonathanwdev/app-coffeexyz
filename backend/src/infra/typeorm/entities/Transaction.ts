@@ -4,7 +4,13 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+
+import User from './User';
+import TransactionItems from './TransactionItems';
 
 @Entity('transactions')
 class Transaction {
@@ -13,6 +19,16 @@ class Transaction {
 
   @Column()
   user_id: string;
+
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: string;
+
+  @OneToMany(
+    () => TransactionItems,
+    transactionItem => transactionItem.transaction,
+  )
+  transactionItems: TransactionItems[];
 
   @Column()
   user_name: string;

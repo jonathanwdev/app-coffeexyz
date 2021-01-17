@@ -4,7 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import Transaction from './Transaction';
 
 @Entity('transaction_items')
 class TransactionItems {
@@ -28,6 +31,13 @@ class TransactionItems {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToOne(
+    () => Transaction,
+    transactionEntity => transactionEntity.transactionItems,
+  )
+  @JoinColumn({ name: 'transaction_id' })
+  transaction: Transaction;
 }
 
 export default TransactionItems;
