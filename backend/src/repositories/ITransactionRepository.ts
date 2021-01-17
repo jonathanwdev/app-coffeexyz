@@ -11,7 +11,7 @@ export type TransactionListData = {
   cep_number: string;
   card_type: string;
   card_name: string;
-  card_number: number;
+  card_number: string;
   card_expiresIn: string;
   card_cvv: number;
   transaction_list: TransactionItem[];
