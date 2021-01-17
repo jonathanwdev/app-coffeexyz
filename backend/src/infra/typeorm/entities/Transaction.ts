@@ -30,7 +30,7 @@ class Transaction {
   state: string;
 
   @Column()
-  cep_number: number;
+  cep_number: string;
 
   @Column()
   card_type: string;
@@ -39,7 +39,7 @@ class Transaction {
   card_name: string;
 
   @Column()
-  card_number: number;
+  card_number: string;
 
   @Column()
   card_expiresIn: string;
