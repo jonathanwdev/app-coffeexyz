@@ -3,7 +3,7 @@ import AuthService from '../../../services/AuthService';
 import UserRepository from '../../typeorm/repositories/UserRepository';
 
 class AuthController {
-  public async auth(req: Request, res: Response): Promise<Response> {
+  public async create(req: Request, res: Response): Promise<Response> {
     const userRepository = new UserRepository();
     const authService = new AuthService(userRepository);
     const { email } = req.body;
