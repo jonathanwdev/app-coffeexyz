@@ -1,7 +1,7 @@
 import TransactionItems from '../infra/typeorm/entities/TransactionItems';
 
 export type TransactionItem = {
-  transaction_id: string;
+  product_id: string;
   amount: number;
   comment: string;
 };
