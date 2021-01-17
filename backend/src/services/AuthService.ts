@@ -1,5 +1,6 @@
 import User from 'infra/typeorm/entities/User';
 import { sign } from 'jsonwebtoken';
+import ErrorHandler from '../Errors/ErrorHandler';
 import jwtConfig from '../config/jwt';
 import IUserRepository from '../repositories/IUserRepository';
 
@@ -16,6 +17,10 @@ class AuthService {
   }
 
   public async execute(email: string): Promise<Response> {
+    if (!email) {
+      throw new ErrorHandler('Error, invalid email', 401);
+    }
+
     const findUser = await this.userRepository.findByEmail(email);
     let token;
 
