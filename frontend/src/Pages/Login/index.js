@@ -34,7 +34,9 @@ const Login = () => {
         setLoading(false);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
-          formRef.current && formRef.current.setErrors(errors);
+          if (formRef.current) {
+            formRef.current.setErrors(errors);
+          }
           // eslint-disable-next-line no-useless-return
           return;
         }
