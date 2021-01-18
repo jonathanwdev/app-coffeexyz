@@ -77,7 +77,7 @@ export default createGlobalStyle`
 
   body, input, button {
     font-size: 1.2rem;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   a {
