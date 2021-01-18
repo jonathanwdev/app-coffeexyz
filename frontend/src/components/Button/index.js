@@ -29,7 +29,7 @@ function Button({
 export default Button;
 
 Button.propTypes = {
-  width: '',
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   loading: PropTypes.bool,
   marginTop: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   marginBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -47,5 +47,5 @@ Button.defaultProps = {
   marginBottom: '',
   marginLeft: '',
   marginRight: '',
-  onClick: () => {},
+  onClick: null,
 };
