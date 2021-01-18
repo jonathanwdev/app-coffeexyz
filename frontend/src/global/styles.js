@@ -69,7 +69,6 @@ export default createGlobalStyle`
 
   body{
     -webkit-font-smoothing: antialiased;
-    background:#000;
   }
 
   body, #root{
@@ -94,5 +93,5 @@ export default createGlobalStyle`
     border:0;
     background:none;
   }
-  
+
 `;
