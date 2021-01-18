@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route as ReactDOMRoute, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useAuth } from '../hooks/AuthContext';
 
 const Routes = ({ isPrivate = false, component: Component, ...rest }) => {
-  const user = false;
+  const { user } = useAuth();
 
   return (
     <ReactDOMRoute
