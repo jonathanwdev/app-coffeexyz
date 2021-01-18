@@ -11,9 +11,11 @@ function Button({
   marginLeft,
   marginRight,
   onClick,
+  type,
 }) {
   return (
     <Container
+      type={type}
       onClick={onClick}
       width={width}
       marginTop={marginTop}
@@ -31,6 +33,7 @@ export default Button;
 Button.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   loading: PropTypes.bool,
+  type: PropTypes.string,
   marginTop: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   marginBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   marginLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -41,6 +44,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   label: 'BUTTON',
+  type: 'button',
   width: 120,
   loading: false,
   marginTop: '',
