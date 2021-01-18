@@ -10,7 +10,7 @@ export const Container = styled.button(
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 30,
+    height: 28,
     borderRadius: 20,
     fontWeight: 700,
     fontSize: 14,
