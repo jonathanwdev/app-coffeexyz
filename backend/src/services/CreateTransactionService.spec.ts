@@ -44,6 +44,14 @@ const makeFakeTransaction = (): Transaction => ({
   card_number: '123445677897',
   card_expiresIn: '12/17',
   card_cvv: 171,
+  transactionItems: [
+    {
+      product_id: '10',
+      amount: 12,
+      comment: 'Uma transação de teste',
+    },
+  ],
+  user: {},
   created_at: new Date(),
   updated_at: new Date(),
 });
@@ -110,5 +118,28 @@ describe('Create Transaction', () => {
     await expect(sut.execute({ address: 'ok' }, '456')).rejects.toBeInstanceOf(
       ErrorHandler,
     );
+  });
+  it('shoud throws if transactions list is empty', async () => {
+    const { sut } = makeSut();
+    await expect(
+      sut.execute(
+        {
+          user_id: '80c1aa99-2853-4e8c-bbeb-363c4b8ea320',
+          user_name: 'Capitão Jack',
+          user_email: 'jonathan@mail.com',
+          address: 'rua dos bobos',
+          country: 'brasil',
+          state: 'Rio de Janeiro',
+          cep_number: '26336144',
+          card_type: 'credit',
+          card_name: 'Jonathan Card Number',
+          card_number: '123445677897',
+          card_expiresIn: '12/17',
+          card_cvv: 171,
+          transaction_list: [],
+        },
+        '456',
+      ),
+    ).rejects.toBeInstanceOf(ErrorHandler);
   });
 });
