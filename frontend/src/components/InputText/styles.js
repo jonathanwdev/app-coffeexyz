@@ -19,7 +19,7 @@ export const Container = styled.div(
 
     '.input': {
       width: '100%',
-      border: error ? '1px solid var(--color-red-strong)' : 0,
+      border: error ? '3px solid var(--color-red-strong)' : 0,
       height: 28,
       padding: '4px 10px',
       fontSize: 14,
