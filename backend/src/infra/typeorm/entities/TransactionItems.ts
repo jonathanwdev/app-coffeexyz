@@ -21,6 +21,12 @@ class TransactionItems {
   transaction_id: string;
 
   @Column()
+  picture_url: string;
+
+  @Column()
+  name: string;
+
+  @Column()
   amount: number;
 
   @Column()

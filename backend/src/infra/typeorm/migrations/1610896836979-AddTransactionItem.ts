@@ -33,6 +33,16 @@ export class AddTransactionItem1610896836979 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'name',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'picture_url',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
