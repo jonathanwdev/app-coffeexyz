@@ -73,6 +73,11 @@ export class AddTransaction1610895893244 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'total_price',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

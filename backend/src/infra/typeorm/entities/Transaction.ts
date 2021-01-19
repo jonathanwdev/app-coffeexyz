@@ -63,6 +63,9 @@ class Transaction {
   @Column()
   card_cvv: number;
 
+  @Column()
+  total_price: string;
+
   @CreateDateColumn()
   created_at: Date;
 
