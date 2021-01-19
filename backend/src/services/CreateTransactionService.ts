@@ -35,6 +35,7 @@ class CreateTransactionService {
       'card_number',
       'card_expiresIn',
       'card_cvv',
+      'total_price',
     ];
 
     for (const field of requiredFields) {
@@ -48,7 +49,7 @@ class CreateTransactionService {
     await this.transactionRepository.save(transaction);
 
     if (data.transaction_list.length === 0) {
-      throw new ErrorHandler(`Missing products`, 401);
+      throw new ErrorHandler('Missing products', 401);
     }
     data.transaction_list.forEach(async item => {
       const newItem = { ...item, transaction_id: transaction.id };
