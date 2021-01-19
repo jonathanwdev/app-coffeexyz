@@ -29,17 +29,78 @@ const CartProvider = ({ children }) => {
     setVisible(true);
   }, []);
 
+  const addProductComment = useCallback(
+    (product, text) => {
+      const productIdx = cartProducts.findIndex((p) => p.id === product.id);
+      setCartProducts((lastProducs) => {
+        lastProducs[productIdx].comment = text;
+        return [...lastProducs];
+      });
+    },
+    [cartProducts]
+  );
+
+  const addProductAmount = useCallback(
+    (product) => {
+      const productIdx = cartProducts.findIndex((p) => p.id === product.id);
+      setCartProducts((lastProducs) => {
+        lastProducs[productIdx].amount += 1;
+        return [...lastProducs];
+      });
+    },
+    [cartProducts]
+  );
+
+  const removeProductAmount = useCallback(
+    (product) => {
+      const productIdx = cartProducts.findIndex((p) => p.id === product.id);
+      setCartProducts((lastProducs) => {
+        if (lastProducs[productIdx].amount === 1) {
+          lastProducs.splice(productIdx, 1);
+          return [...lastProducs];
+        }
+        lastProducs[productIdx].amount -= 1;
+        return [...lastProducs];
+      });
+    },
+    [cartProducts]
+  );
+
+  const removeProductToCart = useCallback(
+    (product) => {
+      const productIdx = cartProducts.findIndex((p) => p.id === product.id);
+      setCartProducts((lastProducs) => {
+        lastProducs.splice(productIdx, 1);
+        return [...lastProducs];
+      });
+    },
+    [cartProducts]
+  );
+
   useEffect(() => {
     setCartTotal(
       Format(
-        cartProducts.reduce((totalSum, product) => totalSum + product.price, 0)
+        cartProducts.reduce(
+          (totalSum, product) => totalSum + product.price * product.amount,
+          0
+        )
       )
     );
   }, [cartProducts]);
 
   return (
     <CartContext.Provider
-      value={{ cartTotal, visible, toggleCart, cartProducts, addProductToCart }}
+      value={{
+        cartTotal,
+        visible,
+        toggleCart,
+        cartProducts,
+        addProductToCart,
+        removeProductToCart,
+        addProductAmount,
+        removeProductAmount,
+        addProductComment,
+      }}
     >
       {children}
     </CartContext.Provider>
