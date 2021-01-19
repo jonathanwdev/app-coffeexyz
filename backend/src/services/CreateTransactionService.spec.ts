@@ -1,14 +1,11 @@
-import {
-  ITransactionRepository,
-  TransactionListData,
-} from '../repositories/ITransactionRepository';
+import { ITransactionRepository } from '../repositories/ITransactionRepository';
 import { ITransactionItemsRepository } from '../repositories/ITransactionItemsRepository';
 import Transaction from '../infra/typeorm/entities/Transaction';
 import TransactionItems from '../infra/typeorm/entities/TransactionItems';
 import CreateTransactionService from './CreateTransactionService';
 import ErrorHandler from '../Errors/ErrorHandler';
 
-const makeFakeTransactionRequest = (): TransactionListData => ({
+const makeFakeTransactionRequest = () => ({
   user_id: '80c1aa99-2853-4e8c-bbeb-363c4b8ea320',
   user_name: 'Capitão Jack',
   user_email: 'jonathan@mail.com',
@@ -21,6 +18,7 @@ const makeFakeTransactionRequest = (): TransactionListData => ({
   card_number: '123445677897',
   card_expiresIn: '12/17',
   card_cvv: 171,
+  total_price: '200',
   transaction_list: [
     {
       product_id: '10',
@@ -44,19 +42,24 @@ const makeFakeTransaction = (): Transaction => ({
   card_number: '123445677897',
   card_expiresIn: '12/17',
   card_cvv: 171,
+  total_price: '200',
   transactionItems: [
     {
-      product_id: '10',
-      amount: 12,
-      comment: 'Uma transação de teste',
+      id: 'any_id',
+      amount: 4,
+      comment: 'any_text',
+      product_id: '14',
+      transaction_id: 'dd33',
+      created_at: new Date(),
+      updated_at: new Date(),
     },
   ],
-  user: {},
+  user: '',
   created_at: new Date(),
   updated_at: new Date(),
 });
 
-const makeFakeTransactionItemsRequest = (): TransactionItems => ({
+const makeFakeTransactionItemsRequest = () => ({
   id: 'any_id',
   amount: 4,
   comment: 'any_text',
@@ -136,6 +139,7 @@ describe('Create Transaction', () => {
           card_number: '123445677897',
           card_expiresIn: '12/17',
           card_cvv: 171,
+          total_price: '200',
           transaction_list: [],
         },
         '456',
