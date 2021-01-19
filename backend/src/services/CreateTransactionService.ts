@@ -47,6 +47,9 @@ class CreateTransactionService {
     const transaction = await this.transactionRepository.create(newData);
     await this.transactionRepository.save(transaction);
 
+    if (data.transaction_list.length === 0) {
+      throw new ErrorHandler(`Missing products`, 401);
+    }
     data.transaction_list.forEach(async item => {
       const newItem = { ...item, transaction_id: transaction.id };
       const transactionItem = await this.transactionItemsRepository.create(
