@@ -10,6 +10,10 @@ function InputText({
   width,
   placeholder,
   onChange,
+  marginTop,
+  marginRight,
+  marginLeft,
+  marginBottom,
   ...rest
 }) {
   const inputRef = useRef(null);
@@ -37,7 +41,14 @@ function InputText({
   }, [fieldName, registerField]);
 
   return (
-    <Container width={width} error={!!error}>
+    <Container
+      marginTop={marginTop}
+      marginRight={marginRight}
+      marginLeft={marginLeft}
+      marginBottom={marginBottom}
+      width={width}
+      error={!!error}
+    >
       {label && <p className="label">{label}</p>}
       <input
         defaultValue={defaultValue}
@@ -61,6 +72,10 @@ InputText.propTypes = {
   placeholder: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
+  marginTop: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  marginBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  marginLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  marginRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 InputText.defaultProps = {
@@ -69,4 +84,8 @@ InputText.defaultProps = {
   width: '',
   placeholder: 'Digite...',
   onChange: null,
+  marginTop: '',
+  marginBottom: '',
+  marginLeft: '',
+  marginRight: '',
 };
