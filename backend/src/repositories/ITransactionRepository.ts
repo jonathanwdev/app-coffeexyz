@@ -14,6 +14,7 @@ export type TransactionListData = {
   card_number: string;
   card_expiresIn: string;
   card_cvv: number;
+  total_price: string;
   transaction_list: TransactionItem[];
 };
 
