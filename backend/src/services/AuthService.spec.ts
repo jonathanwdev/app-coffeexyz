@@ -13,15 +13,15 @@ const fakeMail = 'jon@mail.com';
 
 const makeFakeUserRepository = (): IUserRepository => {
   class UserRepositoryStub implements IUserRepository {
-    async create(email): Promise<User> {
+    async create(email: string): Promise<User> {
       return new Promise(resolve => resolve(makeFakeUser()));
     }
 
-    async save(email): Promise<User> {
+    async save(user: User): Promise<User> {
       return new Promise(resolve => resolve(makeFakeUser()));
     }
 
-    async findByEmail(email): Promise<User | undefined> {
+    async findByEmail(email: string): Promise<User | undefined> {
       return new Promise(resolve => resolve(makeFakeUser()));
     }
   }
