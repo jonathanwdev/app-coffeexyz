@@ -17,6 +17,8 @@ const makeFakeTransaction = (): Transaction => ({
   card_number: '123445677897',
   card_expiresIn: '12/17',
   card_cvv: 171,
+  transactionItems: [],
+  user: '',
   created_at: new Date(),
   updated_at: new Date(),
 });
