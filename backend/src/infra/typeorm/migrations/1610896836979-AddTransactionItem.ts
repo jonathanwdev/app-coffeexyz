@@ -30,7 +30,7 @@ export class AddTransactionItem1610896836979 implements MigrationInterface {
           {
             name: 'comment',
             type: 'text',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'created_at',
