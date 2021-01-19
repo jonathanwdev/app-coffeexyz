@@ -14,7 +14,9 @@ const Home = () => {
       const response = await api.get('/products');
       const formattedData = response.data.map((item) => ({
         newPrice: Format(item.price),
-        amount: 0,
+        product_id: item.id,
+        amount: 1,
+        comment: '',
         ...item,
       }));
       setProducts(formattedData);
@@ -22,7 +24,6 @@ const Home = () => {
       alert(err);
     }
   };
-
   useEffect(() => {
     loadProducts();
   }, []);
@@ -41,7 +42,6 @@ const Home = () => {
               <p className="price-label">
                 Preço: <strong>{item.newPrice}</strong>
               </p>
-
               <Button
                 label="ADICIONAR"
                 onClick={() => addProductToCart(item)}
