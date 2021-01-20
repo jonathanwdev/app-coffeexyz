@@ -18,7 +18,7 @@ function Modal({ open, toggle }) {
   const { cartProducts, clearCart, cartTotal } = useCart();
 
   const handleSubmit = useCallback(
-    async (data) => {
+    async (data, { reset }) => {
       try {
         setLoading(true);
         const schema = Yup.object().shape({
@@ -40,15 +40,15 @@ function Modal({ open, toggle }) {
           abortEarly: false,
         });
 
-        const newData = {
+        await api.post('/transaction', {
           ...data,
           transaction_list: cartProducts,
           total_price: cartTotal,
-        };
-        await api.post('/transaction', newData);
+        });
         alert('Transação efetuada com sucesso !!');
         setLoading(false);
         clearCart();
+        reset();
         toggle();
       } catch (err) {
         setLoading(false);
@@ -63,7 +63,7 @@ function Modal({ open, toggle }) {
         }
       }
     },
-    [cartProducts, cartTotal, clearCart, toggle]
+    [cartProducts, cartTotal, toggle, clearCart]
   );
 
   return (
@@ -122,6 +122,7 @@ function Modal({ open, toggle }) {
                 placeholder="CEP"
                 type="text"
                 width="31.3%"
+                mask="99999-999"
               />
             </div>
             <div className="flex">
@@ -144,9 +145,10 @@ function Modal({ open, toggle }) {
               <InputText
                 name="card_number"
                 label="Numero do Cartão"
-                placeholder="4567123445789652"
+                placeholder="9999-9999-9999-9999"
                 type="text"
                 width="38%"
+                mask="9999-9999-9999-9999"
               />
               <InputText
                 name="card_cvv"
@@ -154,6 +156,7 @@ function Modal({ open, toggle }) {
                 placeholder="171"
                 type="number"
                 width="28%"
+                mask="999"
               />
               <InputText
                 name="card_expiresIn"
@@ -161,6 +164,7 @@ function Modal({ open, toggle }) {
                 placeholder="12/18"
                 type="text"
                 width="28%"
+                mask="99/99"
               />
             </div>
             <ProductsList>
