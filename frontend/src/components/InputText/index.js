@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
+import VMasker from 'vanilla-masker';
 import { Container } from './styles';
 
 function InputText({
@@ -14,6 +15,8 @@ function InputText({
   marginRight,
   marginLeft,
   marginBottom,
+  keyboardEnter,
+  mask,
   ...rest
 }) {
   const inputRef = useRef(null);
@@ -25,6 +28,12 @@ function InputText({
     const timeOutId = setTimeout(() => setdisplayText(query), 550);
     return () => clearTimeout(timeOutId);
   }, [query]);
+
+  useEffect(() => {
+    if (mask && inputRef.current) {
+      VMasker(inputRef.current).maskPattern(mask);
+    }
+  }, [mask, inputRef]);
 
   useEffect(() => {
     if (onChange) {
@@ -57,6 +66,9 @@ function InputText({
         className="input"
         placeholder={placeholder}
         type={type}
+        onKeyPress={(ev) =>
+          ev.key === 'Enter' && keyboardEnter && keyboardEnter(ev)
+        }
         {...rest}
       />
     </Container>
@@ -67,8 +79,10 @@ export default InputText;
 
 InputText.propTypes = {
   label: PropTypes.string,
+  mask: PropTypes.string,
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
+  keyboardEnter: PropTypes.func,
   placeholder: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
@@ -80,6 +94,7 @@ InputText.propTypes = {
 
 InputText.defaultProps = {
   type: 'text',
+  mask: '',
   label: '',
   width: '',
   placeholder: 'Digite...',
@@ -88,4 +103,5 @@ InputText.defaultProps = {
   marginBottom: '',
   marginLeft: '',
   marginRight: '',
+  keyboardEnter: null,
 };
