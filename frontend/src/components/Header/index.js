@@ -8,7 +8,7 @@ import { useCart } from '../../hooks/CartContext';
 
 function Header() {
   const { user, signOut } = useAuth();
-  const { toggleCart } = useCart();
+  const { toggleCart, closeCart } = useCart();
   const currentPath = useLocation().pathname.replace('/', '').trim();
   const history = useHistory();
 
@@ -46,7 +46,10 @@ function Header() {
             width={80}
             marginLeft={40}
             type="button"
-            onClick={signOut}
+            onClick={() => {
+              closeCart();
+              signOut();
+            }}
           />
         </aside>
       </nav>
