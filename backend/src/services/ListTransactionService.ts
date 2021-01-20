@@ -1,4 +1,4 @@
-import Transaction from 'infra/typeorm/entities/Transaction';
+import Transaction from '../infra/typeorm/entities/Transaction';
 import ErrorHandler from '../Errors/ErrorHandler';
 import { ITransactionRepository } from '../repositories/ITransactionRepository';
 

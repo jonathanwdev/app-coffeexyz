@@ -1,4 +1,4 @@
-import IUserRepository from 'repositories/IUserRepository';
+import IUserRepository from '../repositories/IUserRepository';
 import ErrorHandler from '../Errors/ErrorHandler';
 import User from '../infra/typeorm/entities/User';
 import AuthService from './AuthService';

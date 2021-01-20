@@ -1,5 +1,5 @@
-import User from 'infra/typeorm/entities/User';
 import { sign } from 'jsonwebtoken';
+import User from '../infra/typeorm/entities/User';
 import ErrorHandler from '../Errors/ErrorHandler';
 import jwtConfig from '../config/jwt';
 import IUserRepository from '../repositories/IUserRepository';

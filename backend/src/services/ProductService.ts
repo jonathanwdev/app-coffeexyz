@@ -1,4 +1,4 @@
-import Product from 'infra/typeorm/entities/Product';
+import Product from '../infra/typeorm/entities/Product';
 import IProductRepository from '../repositories/IProductRepository';
 
 class AuthService {
