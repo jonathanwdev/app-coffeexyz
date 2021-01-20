@@ -28,7 +28,7 @@ function Transactions() {
 
   useEffect(() => {
     loadTransaction();
-  }, []);
+  }, [loadTransaction]);
 
   return (
     <Container>

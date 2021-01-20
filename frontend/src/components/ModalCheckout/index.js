@@ -63,7 +63,7 @@ function Modal({ open, toggle }) {
         }
       }
     },
-    [cartProducts, cartTotal, toggle]
+    [cartProducts, cartTotal, clearCart, toggle]
   );
 
   return (
