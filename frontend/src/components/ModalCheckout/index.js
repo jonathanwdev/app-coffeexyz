@@ -15,7 +15,8 @@ function Modal({ open, toggle }) {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
-  const { cartProducts, cartTotal } = useCart();
+  const { cartProducts, clearCart, cartTotal } = useCart();
+
   const handleSubmit = useCallback(
     async (data) => {
       try {
@@ -34,7 +35,6 @@ function Modal({ open, toggle }) {
             'Data de expiração é obrigatória'
           ),
           card_cvv: Yup.number().required('CVV é obrigatório'),
-          transaction_list: Yup.array().required(),
         });
         await schema.validate(data, {
           abortEarly: false,
@@ -48,6 +48,7 @@ function Modal({ open, toggle }) {
         await api.post('/transaction', newData);
         alert('Transação efetuada com sucesso !!');
         setLoading(false);
+        clearCart();
         toggle();
       } catch (err) {
         setLoading(false);

@@ -19,6 +19,10 @@ const CartProvider = ({ children }) => {
     setVisible((state) => !state);
   }, []);
 
+  const clearCart = () => {
+    setCartProducts([]);
+  };
+
   const addProductToCart = useCallback((product) => {
     setCartProducts((lastCart) => {
       if (!lastCart.find((item) => item.id === product.id)) {
@@ -100,6 +104,7 @@ const CartProvider = ({ children }) => {
         addProductAmount,
         removeProductAmount,
         addProductComment,
+        clearCart,
       }}
     >
       {children}
